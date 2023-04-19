@@ -9,4 +9,4 @@ So i decided to build a very simple and generic tool that counts the days that h
 
 // NOTE: i will most likely be changing this in the future to XdsY [ X days since Y ] which would be more generic and i think a lil catchier.
 
-this is a WIP, I'm using this idea as a learning path towards learning Rust. (*Rust is kinda hard, yo*)
+this is a WIP, I'm using this idea as a learning path towards learning Rust.
