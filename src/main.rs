@@ -1,4 +1,5 @@
-use std::{env::{self}};
+use chrono::Utc;
+use std::env::{self};
 
 // entry object
 // each entry will have a string and a date
@@ -7,19 +8,19 @@ use std::{env::{self}};
 // X days without Y
 // X represents the days calculated since the entry's tagged date
 // Y represents the string associated.
-use chrono::Utc;
 
 struct Entry {
     date: i64,
     y: String,
 }
+
 impl Entry {
     fn days_elapsed(&self) -> i64 {
-        return (Utc::now().timestamp() - self.date) / 60 / 60 / 24;
+        (Utc::now().timestamp() - self.date) / 60 / 60 / 24
     }
 }
 
-fn list_entries(entries: &Vec<Entry>) {
+fn list_entries(entries: &[Entry]) {
     for entry in entries.iter() {
         println!("{} days since {}", entry.days_elapsed(), entry.y);
     }
@@ -50,18 +51,17 @@ fn interactive_mode(entries: &mut Vec<Entry>) {
         println!("add new entry:");
         let mut user_input = String::new();
         std::io::stdin().read_line(&mut user_input).unwrap();
-        let user_input_array: Vec<&str> = user_input.split(" ").collect();
-            match user_input_array[0].trim_end() {
-                    "/list" => list_entries(entries),
-                    "/exit" => break,
-                    _ =>{ 
-                    if user_input_array[0].len() > 1 {
-                        entries.push(add_entry(&user_input));
-                    }else {
-                        println!("please enter a valid entry")
-                    }}
-                } 
+        let user_input_array: Vec<&str> = user_input.split(' ').collect();
+        match user_input_array[0].trim_end() {
+            "/list" => list_entries(entries),
+            "/exit" => break,
+            _ => {
+                if user_input_array[0].len() > 1 {
+                    entries.push(add_entry(&user_input));
+                } else {
+                    println!("please enter a valid entry")
+                }
             }
+        }
     }
-
-
+}
