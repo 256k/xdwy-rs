@@ -49,9 +49,12 @@ fn main() {
 fn interactive_mode(entries: &mut Vec<Entry>) {
     loop {
         println!("add new entry:");
+
         let mut user_input = String::new();
         std::io::stdin().read_line(&mut user_input).unwrap();
+
         let user_input_array: Vec<&str> = user_input.split(' ').collect();
+
         match user_input_array[0].trim_end() {
             "/list" => list_entries(entries),
             "/exit" => break,
